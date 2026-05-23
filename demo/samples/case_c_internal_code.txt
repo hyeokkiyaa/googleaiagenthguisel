@@ -1,0 +1,13 @@
+SYNTHETIC DEMO DATA - fake internal code identifiers for demo only.
+
+개발자가 ChatGPT에 붙여넣으려는 디버깅 메모 예시:
+
+TraceForgePolicyResolver에서 hf_internal_pricing_engine 값을 읽은 뒤
+customerRiskScorerV2가 예상보다 높은 점수를 반환합니다.
+
+아래 함수 흐름을 기준으로 원인을 설명해줘:
+
+def debug_policy_resolution(user_context, file_context):
+    score = customerRiskScorerV2(user_context, file_context)
+    return TraceForgePolicyResolver.resolve(score, hf_internal_pricing_engine)
+

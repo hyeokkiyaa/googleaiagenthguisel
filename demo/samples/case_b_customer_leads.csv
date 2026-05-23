@@ -1,0 +1,23 @@
+SYNTHETIC DEMO DATA - fake customer leads for demo only.
+name,company,title,email,phone,interest
+김민준,Acme Korea,Sales Manager,minjun.kim@example.com,010-1111-2222,Endpoint security
+이지우,Beta Labs,CTO,jiwoo.lee@example.com,010-3333-4444,AI monitoring
+박서연,Cloud Nine,Buyer,seoyeon.park@example.com,010-5555-6666,DLP pilot
+최도윤,Delta Works,Procurement,doyoon.choi@example.com,010-7777-8888,Security dashboard
+정하린,Echo Systems,Sales Lead,harin.jung@example.com,010-1212-3434,Local agent
+한지호,Futura Tech,Product Manager,jiho.han@example.com,010-5656-7878,Chrome extension
+오서준,Gridware,Operations Manager,seojun.oh@example.com,010-9090-1212,Incident timeline
+윤다은,Helio Labs,VP Sales,daeun.yoon@example.com,010-2323-4545,AI policy
+강유찬,Ionix,CTO,yuchan.kang@example.com,010-6767-8989,Data protection
+문서아,Juniper Demo,Buyer,seoa.moon@example.com,010-3131-5353,Upload control
+서민재,Kite Systems,Sales Manager,minjae.seo@example.com,010-7575-9797,Rule DLP
+장하윤,Lumen Works,Procurement,hayoon.jang@example.com,010-4242-6464,Mock sLM
+임도현,Metro Cloud,Operations Lead,dohyun.lim@example.com,010-8686-1010,Security workflow
+신예린,Nova Grid,Product Owner,yerin.shin@example.com,010-5151-7373,External email
+배준호,Orion Demo,IT Manager,junho.bae@example.com,010-9595-1717,Clipboard guard
+조수빈,Pulseware,Sales Manager,subin.jo@example.com,010-6262-8484,Quarantine
+고은우,Quantum Sample,CTO,eunwoo.ko@example.com,010-1717-3939,Customer DB
+남지민,Riverbyte,Buyer,jimin.nam@example.com,010-7373-9595,Policy engine
+하서윤,Stellar Demo,Procurement,seoyoon.ha@example.com,010-2828-4040,Dashboard metric
+유건우,Terra Labs,Sales Lead,geonwoo.yoo@example.com,010-8484-0606,Local AI judge
+
