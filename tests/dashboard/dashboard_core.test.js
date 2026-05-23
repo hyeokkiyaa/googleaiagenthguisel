@@ -35,9 +35,9 @@ test("formats metric rows in dashboard order", () => {
 });
 
 test("formats productivity labels", () => {
-  assert.equal(productivityLabel("prevented_false_positive"), "Prevented false positive");
-  assert.equal(productivityLabel("prevented_false_negative"), "Prevented false negative");
-  assert.equal(productivityLabel("none"), "No productivity delta");
+  assert.equal(productivityLabel("prevented_false_positive"), "오탐 방지");
+  assert.equal(productivityLabel("prevented_false_negative"), "미탐 방지");
+  assert.equal(productivityLabel("none"), "변화 없음");
 });
 
 test("summarizes incident for list rendering", () => {

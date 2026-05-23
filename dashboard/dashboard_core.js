@@ -11,10 +11,10 @@
 
   function productivityLabel(impactType) {
     const labels = {
-      prevented_false_positive: "Prevented false positive",
-      prevented_false_negative: "Prevented false negative",
-      manual_review_saved: "Manual review saved",
-      none: "No productivity delta",
+      prevented_false_positive: "오탐 방지",
+      prevented_false_negative: "미탐 방지",
+      manual_review_saved: "수동 검토 생략",
+      none: "변화 없음",
     };
 
     return labels[impactType] || impactType;
