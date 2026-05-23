@@ -57,6 +57,8 @@ def _impact_type(rule_result: RuleResult, ai_result: AIResult, decision: str) ->
 def _final_reason(rule_result: RuleResult, ai_result: AIResult, decision: str) -> str:
     if decision == "BLOCK" and ai_result.decision == "BLOCK":
         return f"AI Judge blocked the action: {ai_result.reason}"
+    if decision == "BLOCK":
+        return f"Rule engine blocked: {rule_result.reason}"
     if decision == "WARN" and rule_result.decision == "BLOCK" and ai_result.decision == "PASS":
         return "Rule DLP found a sensitive pattern, but AI Judge identified a lower-risk personal context."
     if decision == "WARN":
