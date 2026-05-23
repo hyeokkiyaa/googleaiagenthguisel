@@ -14,8 +14,8 @@ def decide_policy(rule_result: RuleResult, ai_result: AIResult) -> PolicyResult:
         # Credentials/secrets: AI cannot override — always BLOCK
         decision = "BLOCK"
         risk_level = "critical"
-    elif rule_result.decision == "BLOCK" and ai_result.decision == "PASS":
-        # AI judged lower risk (e.g. own tax docs) — downgrade to WARN
+    elif rule_result.decision == "BLOCK" and ai_result.decision in ("PASS", "WARN"):
+        # AI didn't confirm full block (e.g. own tax docs) — downgrade to WARN
         decision = "WARN"
         risk_level = "medium"
     elif rule_result.decision == "WARN" and ai_result.decision == "PASS":
@@ -59,7 +59,7 @@ def _final_reason(rule_result: RuleResult, ai_result: AIResult, decision: str) -
         return f"AI Judge blocked the action: {ai_result.reason}"
     if decision == "BLOCK":
         return f"Rule engine blocked: {rule_result.reason}"
-    if decision == "WARN" and rule_result.decision == "BLOCK" and ai_result.decision == "PASS":
+    if decision == "WARN" and rule_result.decision == "BLOCK" and ai_result.decision in ("PASS", "WARN"):
         return "Rule DLP found a sensitive pattern, but AI Judge identified a lower-risk personal context."
     if decision == "WARN":
         return f"Rule DLP requested caution: {rule_result.reason}"
