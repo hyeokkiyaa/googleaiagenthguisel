@@ -1,9 +1,20 @@
+import pytest
 from fastapi.testclient import TestClient
 
-from agent.app.main import app
+from agent.app.main import app, incident_store
 
 
 client = TestClient(app)
+
+
+@pytest.fixture(autouse=True)
+def isolate_incident_store(tmp_path):
+    original_path = incident_store.path
+    incident_store.path = tmp_path / "incidents.json"
+    incident_store.clear()
+    yield
+    incident_store.clear()
+    incident_store.path = original_path
 
 
 def test_health_returns_ok() -> None:
@@ -157,3 +168,39 @@ def test_analyze_case_c_internal_code_is_blocked_as_false_negative_reduction() -
     assert body["decision"] == "BLOCK"
     assert body["risk_level"] == "high"
     assert body["productivity_impact"]["impact_type"] == "prevented_false_negative"
+
+
+def test_analyze_block_creates_incident_and_updates_metrics() -> None:
+    content = "\n".join(
+        [
+            "김민준, Acme Korea, Sales Manager, minjun.kim@example.com, 010-1111-2222",
+            "이지우, Beta Labs, CTO, jiwoo.lee@example.com, 010-3333-4444",
+            "박서연, Cloud Nine, Buyer, seoyeon.park@example.com, 010-5555-6666",
+            "최도윤, Delta Works, Procurement, doyoon.choi@example.com, 010-7777-8888",
+        ]
+    )
+
+    analyze_response = client.post(
+        "/analyze",
+        json={
+            "source": "chrome_extension",
+            "surface": "gmail",
+            "event_type": "browser_paste",
+            "content_type": "text",
+            "content": content,
+        },
+    )
+    incidents_response = client.get("/incidents")
+    metrics_response = client.get("/metrics")
+
+    incident_id = analyze_response.json()["incident_id"]
+    incidents = incidents_response.json()["incidents"]
+
+    assert incident_id == "inc_000001"
+    assert len(incidents) == 1
+    assert incidents[0]["id"] == "inc_000001"
+    assert incidents[0]["decision"] == "BLOCK"
+    assert "[EMAIL]" in incidents[0]["raw_sample_redacted"]
+    assert "[PHONE]" in incidents[0]["raw_sample_redacted"]
+    assert metrics_response.json()["total"] == 1
+    assert metrics_response.json()["block"] == 1

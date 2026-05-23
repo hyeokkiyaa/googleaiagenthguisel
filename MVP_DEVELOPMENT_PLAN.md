@@ -513,8 +513,8 @@ pytest tests/test_file_classifier.py
 | Phase 2: Rule DLP Baseline | 완료 | Rule DLP tests 통과 |
 | Phase 3: Mock sLM AI Judge | 완료 | AI Judge tests 통과 |
 | Phase 4: Policy Decision Engine | 완료 | Policy/API tests 통과 |
-| Phase 5: Incident Store | 대기 | 다음 작업 |
-| Phase 6: Demo Samples | 대기 |  |
+| Phase 5: Incident Store | 완료 | Incident/API tests 통과 |
+| Phase 6: Demo Samples | 대기 | 다음 작업 |
 | Phase 7: Chrome Extension | 대기 |  |
 | Phase 8: Demo Upload Page | 대기 |  |
 | Phase 9: Security Dashboard | 대기 |  |

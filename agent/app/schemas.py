@@ -48,6 +48,24 @@ class PolicyResult(BaseModel):
     productivity_impact: ProductivityImpact
 
 
+class Incident(BaseModel):
+    id: str = ""
+    created_at: str = ""
+    source: str
+    surface: str
+    event_type: str
+    decision: Decision
+    risk_level: RiskLevel
+    rule_decision: Decision
+    ai_decision: Decision
+    title: str
+    summary: str
+    evidence: list[str]
+    final_reason: str
+    productivity_impact: ProductivityImpact
+    raw_sample_redacted: str
+
+
 class AnalyzeResponse(BaseModel):
     decision: Decision
     risk_level: RiskLevel
