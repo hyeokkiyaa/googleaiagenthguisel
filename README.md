@@ -46,16 +46,22 @@ curl http://127.0.0.1:8765/health
 4. Click Load unpacked and select the `extension/` directory.
 5. Paste demo samples into ChatGPT, Gmail, or the local demo upload page.
 
-Run the demo upload page:
+Run static demo pages from the repository root:
 
 ```bash
-python3 -m http.server 8080 -d demo
+python3 -m http.server 8080
 ```
 
-Open:
+Open the upload demo:
 
 ```text
-http://127.0.0.1:8080/upload_page.html
+http://127.0.0.1:8080/demo/upload_page.html
+```
+
+Open the security dashboard:
+
+```text
+http://127.0.0.1:8080/dashboard/index.html
 ```
 
 JavaScript tests:
