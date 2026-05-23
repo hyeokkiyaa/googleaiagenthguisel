@@ -44,7 +44,19 @@ curl http://127.0.0.1:8765/health
 2. Open Chrome `chrome://extensions`.
 3. Enable Developer mode.
 4. Click Load unpacked and select the `extension/` directory.
-5. Paste demo samples into ChatGPT, Gmail, or `demo/upload_page.html`.
+5. Paste demo samples into ChatGPT, Gmail, or the local demo upload page.
+
+Run the demo upload page:
+
+```bash
+python3 -m http.server 8080 -d demo
+```
+
+Open:
+
+```text
+http://127.0.0.1:8080/upload_page.html
+```
 
 JavaScript tests:
 
