@@ -6,6 +6,12 @@ from pydantic import BaseModel, Field
 
 Decision = Literal["PASS", "WARN", "BLOCK"]
 RiskLevel = Literal["low", "medium", "high", "critical"]
+ImpactType = Literal[
+    "none",
+    "prevented_false_positive",
+    "prevented_false_negative",
+    "manual_review_saved",
+]
 
 
 class AnalyzeRequest(BaseModel):
@@ -29,12 +35,27 @@ class AIResult(BaseModel):
     evidence: list[str]
 
 
+class ProductivityImpact(BaseModel):
+    rule_only_outcome: Decision
+    contextguard_outcome: Decision
+    impact_type: ImpactType
+
+
+class PolicyResult(BaseModel):
+    decision: Decision
+    risk_level: RiskLevel
+    final_reason: str
+    productivity_impact: ProductivityImpact
+
+
 class AnalyzeResponse(BaseModel):
     decision: Decision
     risk_level: RiskLevel
     message: str
     rule_result: RuleResult
     ai_result: AIResult
+    final_reason: str
+    productivity_impact: ProductivityImpact
     incident_id: str | None
 
 
@@ -46,4 +67,3 @@ class MetricsResponse(BaseModel):
     prevented_false_positive: int
     prevented_false_negative: int
     manual_review_saved: int
-

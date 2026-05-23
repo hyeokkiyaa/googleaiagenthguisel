@@ -512,8 +512,8 @@ pytest tests/test_file_classifier.py
 | Phase 1: Local Agent API Skeleton | 완료 | API tests 통과 |
 | Phase 2: Rule DLP Baseline | 완료 | Rule DLP tests 통과 |
 | Phase 3: Mock sLM AI Judge | 완료 | AI Judge tests 통과 |
-| Phase 4: Policy Decision Engine | 대기 | 다음 작업 |
-| Phase 5: Incident Store | 대기 |  |
+| Phase 4: Policy Decision Engine | 완료 | Policy/API tests 통과 |
+| Phase 5: Incident Store | 대기 | 다음 작업 |
 | Phase 6: Demo Samples | 대기 |  |
 | Phase 7: Chrome Extension | 대기 |  |
 | Phase 8: Demo Upload Page | 대기 |  |

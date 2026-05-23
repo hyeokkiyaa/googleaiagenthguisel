@@ -7,6 +7,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from agent.app import __version__
 from agent.app.ai_judge import analyze_ai_judge
+from agent.app.policy import decide_policy
 from agent.app.rule_dlp import analyze_rule_dlp
 from agent.app.schemas import AnalyzeRequest, AnalyzeResponse, MetricsResponse
 
@@ -43,16 +44,16 @@ def health() -> dict[str, str]:
 def analyze(request: AnalyzeRequest) -> AnalyzeResponse:
     rule_result = analyze_rule_dlp(request.content)
     ai_result = analyze_ai_judge(request.content, request.surface)
-    risk_level = "medium" if rule_result.decision == "WARN" else "high"
-    if rule_result.decision == "PASS":
-        risk_level = "low"
+    policy_result = decide_policy(rule_result, ai_result)
 
     return AnalyzeResponse(
-        decision=rule_result.decision,
-        risk_level=risk_level,
-        message="Rule DLP baseline and mock AI Judge applied.",
+        decision=policy_result.decision,
+        risk_level=policy_result.risk_level,
+        message="Rule DLP baseline, mock AI Judge, and policy decision applied.",
         rule_result=rule_result,
         ai_result=ai_result,
+        final_reason=policy_result.final_reason,
+        productivity_impact=policy_result.productivity_impact,
         incident_id=None,
     )
 
