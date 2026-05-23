@@ -26,7 +26,18 @@ pip install -r requirements.txt
 pytest
 ```
 
+## Run Local Agent API
+
+```bash
+uvicorn agent.app.main:app --reload --host 127.0.0.1 --port 8765
+```
+
+Health check:
+
+```bash
+curl http://127.0.0.1:8765/health
+```
+
 ## Current Next Step
 
 Follow `MVP_DEVELOPMENT_PLAN.md` from Phase 0 onward.
-

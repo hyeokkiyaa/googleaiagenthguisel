@@ -509,8 +509,8 @@ pytest tests/test_file_classifier.py
 | Phase | 상태 | 비고 |
 | --- | --- | --- |
 | Phase 0: 프로젝트 기본 구조 | 완료 | smoke test 통과 |
-| Phase 1: Local Agent API Skeleton | 대기 | 다음 작업 |
-| Phase 2: Rule DLP Baseline | 대기 |  |
+| Phase 1: Local Agent API Skeleton | 완료 | API tests 통과 |
+| Phase 2: Rule DLP Baseline | 대기 | 다음 작업 |
 | Phase 3: Mock sLM AI Judge | 대기 |  |
 | Phase 4: Policy Decision Engine | 대기 |  |
 | Phase 5: Incident Store | 대기 |  |
