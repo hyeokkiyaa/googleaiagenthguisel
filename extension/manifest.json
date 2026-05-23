@@ -5,8 +5,7 @@
   "description": "Detects risky paste actions and asks the local ContextGuard agent for PASS/WARN/BLOCK decisions.",
   "permissions": [],
   "host_permissions": [
-    "http://127.0.0.1:8765/*",
-    "http://localhost:8765/*"
+    "https://googleaiagenthguisel-production.up.railway.app/*"
   ],
   "content_scripts": [
     {

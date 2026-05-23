@@ -1,5 +1,5 @@
 (function initContextGuardCore(globalScope) {
-  const LocalAgentAnalyzeUrl = "http://127.0.0.1:8765/analyze";
+  const LocalAgentAnalyzeUrl = "https://googleaiagenthguisel-production.up.railway.app/analyze";
 
   function classifySurface(url) {
     let parsedUrl;
