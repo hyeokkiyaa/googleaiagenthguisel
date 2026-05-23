@@ -38,6 +38,19 @@ Health check:
 curl http://127.0.0.1:8765/health
 ```
 
+By default, the API uses the deterministic mock sLM judge so the demo works without network access or API keys.
+
+To run with Gemini:
+
+```bash
+export CONTEXTGUARD_AI_PROVIDER=gemini
+export GEMINI_API_KEY="your-api-key"
+export GEMINI_MODEL="gemini-2.5-flash"
+uvicorn agent.app.main:app --reload --host 127.0.0.1 --port 8765
+```
+
+If Gemini is unavailable or returns invalid JSON, the agent falls back to the mock judge and marks the AI evidence with `gemini_fallback`.
+
 ## Chrome Extension
 
 1. Run the local agent API on `127.0.0.1:8765`.

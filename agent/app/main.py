@@ -6,7 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from agent.app import __version__
-from agent.app.ai_judge import analyze_ai_judge
+from agent.app.ai_provider import analyze_ai_with_provider
 from agent.app.incidents import IncidentStore, build_incident
 from agent.app.policy import decide_policy
 from agent.app.rule_dlp import analyze_rule_dlp
@@ -46,7 +46,7 @@ def health() -> dict[str, str]:
 @app.post("/analyze", response_model=AnalyzeResponse)
 def analyze(request: AnalyzeRequest) -> AnalyzeResponse:
     rule_result = analyze_rule_dlp(request.content)
-    ai_result = analyze_ai_judge(request.content, request.surface)
+    ai_result = analyze_ai_with_provider(request.content, request.surface)
     policy_result = decide_policy(rule_result, ai_result)
     incident = build_incident(request, rule_result, ai_result, policy_result)
     saved_incident = incident_store.save_decision(incident)
