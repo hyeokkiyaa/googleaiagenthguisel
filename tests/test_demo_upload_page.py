@@ -23,3 +23,9 @@ def test_demo_upload_page_mentions_all_demo_cases() -> None:
     assert "Case B" in html
     assert "Case C" in html
 
+
+def test_demo_upload_page_uses_real_newlines_for_case_b_sample() -> None:
+    html = Path("demo/upload_page.html").read_text(encoding="utf-8")
+
+    assert 'join("\\\\n")' not in html
+    assert 'join("\\n")' in html
