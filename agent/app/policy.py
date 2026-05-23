@@ -1,13 +1,21 @@
 """Policy decision engine combining rule and AI risk results."""
 
+from agent.app.rule_dlp import HARD_BLOCK_RULES
 from agent.app.schemas import AIResult, PolicyResult, ProductivityImpact, RuleResult
 
 
 def decide_policy(rule_result: RuleResult, ai_result: AIResult) -> PolicyResult:
+    hard_block = any(r in HARD_BLOCK_RULES for r in rule_result.matched_rules)
+
     if ai_result.decision == "BLOCK":
         decision = "BLOCK"
         risk_level = _blocked_risk_level(ai_result)
+    elif rule_result.decision == "BLOCK" and hard_block:
+        # Credentials/secrets: AI cannot override — always BLOCK
+        decision = "BLOCK"
+        risk_level = "critical"
     elif rule_result.decision == "BLOCK" and ai_result.decision == "PASS":
+        # AI judged lower risk (e.g. own tax docs) — downgrade to WARN
         decision = "WARN"
         risk_level = "medium"
     elif rule_result.decision == "WARN" and ai_result.decision == "PASS":
