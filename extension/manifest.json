@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "ContextGuard Local",
+  "version": "0.1.0",
+  "description": "Detects risky paste actions and asks the local ContextGuard agent for PASS/WARN/BLOCK decisions.",
+  "permissions": [],
+  "host_permissions": [
+    "http://127.0.0.1:8765/*",
+    "http://localhost:8765/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content_core.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}
+

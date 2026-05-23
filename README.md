@@ -38,6 +38,20 @@ Health check:
 curl http://127.0.0.1:8765/health
 ```
 
+## Chrome Extension
+
+1. Run the local agent API on `127.0.0.1:8765`.
+2. Open Chrome `chrome://extensions`.
+3. Enable Developer mode.
+4. Click Load unpacked and select the `extension/` directory.
+5. Paste demo samples into ChatGPT, Gmail, or `demo/upload_page.html`.
+
+JavaScript tests:
+
+```bash
+npm test
+```
+
 ## Current Next Step
 
 Follow `MVP_DEVELOPMENT_PLAN.md` from Phase 0 onward.

@@ -515,8 +515,8 @@ pytest tests/test_file_classifier.py
 | Phase 4: Policy Decision Engine | 완료 | Policy/API tests 통과 |
 | Phase 5: Incident Store | 완료 | Incident/API tests 통과 |
 | Phase 6: Demo Samples | 완료 | Demo case tests 통과 |
-| Phase 7: Chrome Extension | 대기 | 다음 작업 |
-| Phase 8: Demo Upload Page | 대기 |  |
+| Phase 7: Chrome Extension | 완료 | npm test 통과 |
+| Phase 8: Demo Upload Page | 대기 | 다음 작업 |
 | Phase 9: Security Dashboard | 대기 |  |
 | Phase 10: macOS Watcher | 선택 | 시간 남으면 |
 | Phase 11: Optional Ollama Provider | 선택 | 시간 남으면 |
