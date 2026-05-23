@@ -1,5 +1,8 @@
 """FastAPI entrypoint for the ContextGuard local agent."""
 
+import json
+from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import Any
 
 from fastapi import FastAPI
@@ -10,14 +13,28 @@ from agent.app.ai_provider import analyze_ai_with_provider
 from agent.app.incidents import IncidentStore, build_incident
 from agent.app.policy import decide_policy
 from agent.app.rule_dlp import analyze_rule_dlp
-from agent.app.schemas import AnalyzeRequest, AnalyzeResponse, MetricsResponse
+from agent.app.schemas import AnalyzeRequest, AnalyzeResponse, Incident, MetricsResponse
+
+_MOCK_DATA_PATH = Path("dashboard/mock_data.json")
 
 incident_store = IncidentStore()
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI):
+    if not incident_store.list_incidents() and _MOCK_DATA_PATH.exists():
+        with _MOCK_DATA_PATH.open("r", encoding="utf-8") as f:
+            mock = json.load(f)
+        # Store oldest-first so list_incidents() (which reverses) returns newest-first
+        seed = [Incident.model_validate(i) for i in reversed(mock["incidents"])]
+        incident_store._write_all(seed)
+    yield
 
 
 app = FastAPI(
     title="ContextGuard Local Agent",
     version=__version__,
+    lifespan=lifespan,
 )
 
 app.add_middleware(
