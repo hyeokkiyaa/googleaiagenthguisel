@@ -34,9 +34,14 @@ Return ONLY compact JSON matching this schema:
 }}
 
 Decision policy:
-- PASS: normal work or clearly personal own data in a non-external-transfer context.
-- WARN: ambiguous personal or business context that should be reviewed.
-- BLOCK: customer database, confidential business data, internal code identifiers, or company IP sent to external email/AI/upload surfaces.
+- PASS: normal work content, public information, or clearly personal own data in a safe context.
+- WARN: ambiguous personal or business context that should be reviewed before proceeding.
+- BLOCK: any of the following must result in BLOCK with no exceptions:
+  * API keys, secret keys, access tokens (e.g. sk-proj-..., AWS_SECRET_ACCESS_KEY, Bearer tokens)
+  * Database connection strings with credentials (e.g. mysql://user:pass@host)
+  * Cloud provider credentials (AWS, GCP, Azure keys)
+  * Private keys, certificates, or authentication secrets
+  * Customer PII databases, confidential business data, or company IP
 
 Surface: {surface}
 Content:
