@@ -4,4 +4,4 @@ pydantic
 pytest
 httpx
 watchdog
-
+python-dotenv

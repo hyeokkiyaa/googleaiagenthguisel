@@ -21,7 +21,7 @@
 
 1. Local Agent API
 2. Rule DLP baseline
-3. Mock sLM AI Judge with optional Gemini Provider
+3. Mock sLM AI Judge with optional Claude/Gemini Provider
 4. Policy Decision Engine
 5. Incident 저장
 6. Chrome Extension paste 감지와 차단

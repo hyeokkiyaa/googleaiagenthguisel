@@ -38,18 +38,31 @@ Health check:
 curl http://127.0.0.1:8765/health
 ```
 
-By default, the API uses the deterministic mock sLM judge so the demo works without network access or API keys.
+By default, the API uses the deterministic mock sLM judge so the demo works without network access or API keys. Environment variables are automatically loaded from `.env`.
 
-To run with Gemini:
+To run with Claude Haiku 4.5:
 
 ```bash
-export CONTEXTGUARD_AI_PROVIDER=gemini
-export GEMINI_API_KEY="your-api-key"
-export GEMINI_MODEL="gemini-2.5-flash"
+cp .env.example .env
+```
+
+Edit `.env`:
+
+```env
+CONTEXTGUARD_AI_PROVIDER=claude
+ANTHROPIC_API_KEY=your-api-key
+CLAUDE_MODEL=claude-haiku-4-5-20251001
+```
+
+Then run:
+
+```bash
 uvicorn agent.app.main:app --reload --host 127.0.0.1 --port 8765
 ```
 
-If Gemini is unavailable or returns invalid JSON, the agent falls back to the mock judge and marks the AI evidence with `gemini_fallback`.
+If Claude is unavailable or returns invalid JSON, the agent falls back to the mock judge and marks the AI evidence with `claude_fallback`.
+
+Gemini is also supported by setting `CONTEXTGUARD_AI_PROVIDER=gemini` and `GEMINI_API_KEY`.
 
 ## Chrome Extension
 
