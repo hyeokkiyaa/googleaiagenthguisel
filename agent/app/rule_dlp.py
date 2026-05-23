@@ -4,7 +4,7 @@ import re
 
 from agent.app.schemas import RuleResult
 
-RrnPattern = re.compile(r"\b\d{6}-[1-4]\d{6}\b")
+RrnPattern = re.compile(r"(?<!\d)\d{6}-[1-4]\d{6}(?!\d)")
 ConfidentialKeywordPattern = re.compile(
     r"\b(confidential|secret|proprietary|classified)\b",
     re.IGNORECASE,
@@ -39,4 +39,3 @@ def analyze_rule_dlp(content: str) -> RuleResult:
         matched_rules=[],
         reason="No rule DLP pattern matched.",
     )
-

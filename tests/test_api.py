@@ -39,8 +39,8 @@ def test_analyze_returns_decision_schema_for_minimal_request() -> None:
     }
     assert body["ai_result"] == {
         "decision": "PASS",
-        "reason": "AI Judge is not implemented yet.",
-        "evidence": [],
+        "reason": "No risky business, customer, personal, or internal code context was detected.",
+        "evidence": ["no_risky_context_detected"],
     }
 
 
