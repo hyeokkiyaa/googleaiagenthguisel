@@ -508,8 +508,8 @@ pytest tests/test_file_classifier.py
 
 | Phase | 상태 | 비고 |
 | --- | --- | --- |
-| Phase 0: 프로젝트 기본 구조 | 대기 | 다음 작업 |
-| Phase 1: Local Agent API Skeleton | 대기 |  |
+| Phase 0: 프로젝트 기본 구조 | 완료 | smoke test 통과 |
+| Phase 1: Local Agent API Skeleton | 대기 | 다음 작업 |
 | Phase 2: Rule DLP Baseline | 대기 |  |
 | Phase 3: Mock sLM AI Judge | 대기 |  |
 | Phase 4: Policy Decision Engine | 대기 |  |
@@ -538,4 +538,3 @@ Phase 0을 시작할 때 반드시 먼저 만들 테스트:
 1. `tests/test_smoke.py`
 2. `agent/app` 모듈 import 테스트
 3. test runner 동작 확인
-
