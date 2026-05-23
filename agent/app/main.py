@@ -1,55 +1,13 @@
 """FastAPI entrypoint for the ContextGuard local agent."""
 
-from typing import Any, Literal
+from typing import Any
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field
 
 from agent.app import __version__
-
-Decision = Literal["PASS", "WARN", "BLOCK"]
-RiskLevel = Literal["low", "medium", "high", "critical"]
-
-
-class AnalyzeRequest(BaseModel):
-    source: str = Field(..., min_length=1)
-    surface: str = Field(..., min_length=1)
-    event_type: str = Field(..., min_length=1)
-    content_type: str = Field(..., min_length=1)
-    content: str = Field(..., min_length=1)
-    metadata: dict[str, Any] = Field(default_factory=dict)
-
-
-class RuleResult(BaseModel):
-    decision: Decision
-    matched_rules: list[str]
-    reason: str
-
-
-class AIResult(BaseModel):
-    decision: Decision
-    reason: str
-    evidence: list[str]
-
-
-class AnalyzeResponse(BaseModel):
-    decision: Decision
-    risk_level: RiskLevel
-    message: str
-    rule_result: RuleResult
-    ai_result: AIResult
-    incident_id: str | None
-
-
-class MetricsResponse(BaseModel):
-    total: int
-    pass_: int = Field(alias="pass")
-    warn: int
-    block: int
-    prevented_false_positive: int
-    prevented_false_negative: int
-    manual_review_saved: int
+from agent.app.rule_dlp import analyze_rule_dlp
+from agent.app.schemas import AIResult, AnalyzeRequest, AnalyzeResponse, MetricsResponse
 
 
 app = FastAPI(
@@ -81,16 +39,17 @@ def health() -> dict[str, str]:
 
 
 @app.post("/analyze", response_model=AnalyzeResponse)
-def analyze(_: AnalyzeRequest) -> AnalyzeResponse:
+def analyze(request: AnalyzeRequest) -> AnalyzeResponse:
+    rule_result = analyze_rule_dlp(request.content)
+    risk_level = "medium" if rule_result.decision == "WARN" else "high"
+    if rule_result.decision == "PASS":
+        risk_level = "low"
+
     return AnalyzeResponse(
-        decision="PASS",
-        risk_level="low",
-        message="Analysis accepted. Risk engine is not implemented yet.",
-        rule_result=RuleResult(
-            decision="PASS",
-            matched_rules=[],
-            reason="Rule DLP is not implemented yet.",
-        ),
+        decision=rule_result.decision,
+        risk_level=risk_level,
+        message="Rule DLP baseline applied. AI Judge is not implemented yet.",
+        rule_result=rule_result,
         ai_result=AIResult(
             decision="PASS",
             reason="AI Judge is not implemented yet.",

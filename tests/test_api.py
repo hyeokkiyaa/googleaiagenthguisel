@@ -35,7 +35,7 @@ def test_analyze_returns_decision_schema_for_minimal_request() -> None:
     assert body["rule_result"] == {
         "decision": "PASS",
         "matched_rules": [],
-        "reason": "Rule DLP is not implemented yet.",
+        "reason": "No rule DLP pattern matched.",
     }
     assert body["ai_result"] == {
         "decision": "PASS",
